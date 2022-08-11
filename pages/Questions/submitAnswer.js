@@ -11,6 +11,23 @@ const ipfs = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
     const [uploaded, setUploaded] = useState(false)
     const [textUrl, setTextUrl] = useState('')
 
+    const uploadTextToIPFS = async (text) => {
+		try {
+			const res = await fetch('https://quaestio-ipfs.herokuapp.com/text', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({text: text})
+            });
+			const data = await res.json();
+			console.log(data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
     const uploadText = async (e) => {
         setLoading(true)
         e.preventDefault()
@@ -106,10 +123,10 @@ class submitAnswer extends Component{
     /*
     onSubmit=async event=>{
         event.preventDefault();
-       
+
         this.setState({loading:true, errorMsg:''});
         try{
-           
+
         }catch(err){
             this.setState({errorMsg:err.message});
         }
@@ -122,11 +139,11 @@ class submitAnswer extends Component{
             <div>
                 <Layout>
                 <h3> Submit your Answer</h3>
-            
+
             <Form>
                 <Form.Field>
                     <label> Enter Answer</label>
-                    <Input 
+                    <Input
                         value={this.state.value}
                         onChange={event=>this.setState({value:event.target.value})}
                     />
