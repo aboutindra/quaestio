@@ -2,6 +2,23 @@ import Layout from "../../Components/Layout"
 import React, { useState, Component } from 'react'
 import {Form, Input, Message, Button} from "semantic-ui-react"
 import web3 from "../../Ethereum/web3"
+
+const uploadTextToIPFS = async (text) => {
+    try {
+        const res = await fetch('https://quaestio-ipfs.herokuapp.com/text', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({text: text})
+        });
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 class submitQuestion extends Component{
     state={
         value:'',
@@ -23,17 +40,17 @@ class submitQuestion extends Component{
         }
         this.setState({loading:false,value:''});
     };
-    
+
     render(){
         return (
             <div>
                 <Layout>
                 <h3> Submit your Question</h3>
-            
+
             <Form>
                 <Form.Field>
                     <label> Enter Question</label>
-                    <Input 
+                    <Input
                         value={this.state.value}
                         onChange={event=>this.setState({value:event.target.value})}
                     />

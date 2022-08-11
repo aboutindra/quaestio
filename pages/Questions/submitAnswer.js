@@ -21,8 +21,7 @@ const ipfs = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
                 },
                 body: JSON.stringify({text: text})
             });
-			const data = await res.json();
-			console.log(data);
+			return await res.json();
 		} catch (err) {
 			console.log(err);
 		}
