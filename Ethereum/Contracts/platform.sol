@@ -44,16 +44,16 @@ contract Platform {
     int256 total;
   }
 
-  /// counter for issuing post ids
+  // counter for issuing post ids
   Counters.Counter private postIdCounter;
   
-  /// maps post id to vote state
+  // maps post id to vote state
   mapping(uint256 => VoteCount) private postVotes;
 
-  /// maps poster address total query & answer vote score
+  // maps poster address total query & answer vote score
   mapping(address => int256) private posterReputation;
 
-  /// maps post id to post
+  // maps post id to post
   mapping(uint256 => Post) private posts;
 
   /// NewPost events are emitted when a query or answer is created.
