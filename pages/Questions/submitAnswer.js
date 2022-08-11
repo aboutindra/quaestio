@@ -11,21 +11,7 @@ const ipfs = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
     const [uploaded, setUploaded] = useState(false)
     const [textUrl, setTextUrl] = useState('')
 
-    const uploadTextToIPFS = async (text) => {
-		try {
-			const res = await fetch('https://quaestio-ipfs.herokuapp.com/text', {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({text: text})
-            });
-			return await res.json();
-		} catch (err) {
-			console.log(err);
-		}
-	};
+    
 
     const uploadText = async (e) => {
         setLoading(true)
@@ -119,7 +105,22 @@ class submitAnswer extends Component{
         errorMsg:'',
         loading:false
     };
-    /*
+    uploadTextToIPFS = async (text) => {
+		try {
+			const res = await fetch('https://quaestio-ipfs.herokuapp.com/text', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({text: text})
+            });
+			return await res.json();
+		} catch (err) {
+			console.log(err);
+		}
+	};
+    
     onSubmit=async event=>{
         event.preventDefault();
 
@@ -131,6 +132,7 @@ class submitAnswer extends Component{
         }
         this.setState({loading:false,value:''});
     };
+    /*
     onSubmit={this.onSubmit}error={!!this.state.errorMsg}
     */
     render(){
